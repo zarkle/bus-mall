@@ -14,7 +14,7 @@ function Product(productName, filepath, htmlId) {
   Product.allProducts.push(this);
 }
 
-// create instances
+// create instances of Products
 new Product('Star Wars Bag', 'img/bag.jpg', 'star-wars-bag');
 new Product('Banana Slicer', 'img/banana.jpg', 'banana-slicer');
 new Product('Bathroom Helper', 'img/bathroom.jpg', 'bathroom-helper');
@@ -37,6 +37,50 @@ new Product('Self Water Can', 'img/water-can.jpg', 'water-can');
 new Product('Wine Glass', 'img/wine-glass.jpg', 'wine-glass');
 
 // access image elements from DOM
+var productTable = document.getElementById('products-table');
+
+var trEl = document.createElement('tr');
+var thEl = document.createElement('th');
+thEl.textContent = 'Which of the 3 products are you most likely to purchase?';
+trEl.appendChild(thEl);
+productTable.appendChild(trEl);
+
+var i = 0; var j = 1; var k = 2; //index placeholders for testing
+trEl = document.createElement('tr');
+var tdEl = document.createElement('td');
+var imgEl = document.createElement('img');
+imgEl.setAttribute('id', Product.allProducts[i].htmlId);
+imgEl.setAttribute('src', Product.allProducts[i].filepath);
+imgEl.setAttribute('alt', Product.allProducts[i].productName);
+var pEl = document.createElement('p');
+pEl.textContent = Product.allProducts[i].productName;
+tdEl.appendChild(imgEl);
+tdEl.appendChild(pEl);
+trEl.appendChild(tdEl);
+tdEl = document.createElement('td');
+imgEl = document.createElement('img');
+imgEl.setAttribute('id', Product.allProducts[k].htmlId);
+imgEl.setAttribute('src', Product.allProducts[k].filepath);
+imgEl.setAttribute('alt', Product.allProducts[k].productName);
+pEl = document.createElement('p');
+pEl.textContent = Product.allProducts[k].productName;
+tdEl.appendChild(imgEl);
+tdEl.appendChild(pEl);
+trEl.appendChild(tdEl);
+
+tdEl = document.createElement('td');
+imgEl = document.createElement('img');
+imgEl.setAttribute('id', Product.allProducts[j].htmlId);
+imgEl.setAttribute('src', Product.allProducts[j].filepath);
+imgEl.setAttribute('alt', Product.allProducts[j].productName);
+pEl = document.createElement('p');
+pEl.textContent = Product.allProducts[j].productName;
+tdEl.appendChild(imgEl);
+tdEl.appendChild(pEl);
+trEl.appendChild(tdEl);
+
+productTable.appendChild(trEl);
+
 
 // add event listener on the images
 
