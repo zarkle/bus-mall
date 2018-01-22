@@ -38,6 +38,7 @@ new Product('Wine Glass', 'img/wine-glass.jpg', 'wine-glass');
 
 // access image elements from DOM
 function productTableRender() {
+  var i = 0; var j = 1; var k = 2; //index placeholders for testing
   var productTable = document.getElementById('products-table');
   productTable.innerHTML = '';
 
@@ -48,7 +49,6 @@ function productTableRender() {
   trEl.appendChild(thEl);
   productTable.appendChild(trEl);
 
-  var i = 0; var j = 1; var k = 2; //index placeholders for testing
   trEl = document.createElement('tr');
   var tdEl = document.createElement('td');
   var img1 = document.createElement('img');
@@ -87,23 +87,27 @@ function productTableRender() {
   productTable.appendChild(trEl);
 }
 
-// access image element from DOM
-var img1El = document.getElementById(Product.allProducts[i].htmlId);
-// add event listener on the images
-img1.addEventListener('click', nextProductSet);
+// // access image element from DOM
+// var img1El = document.getElementById(Product.allProducts[i].htmlId);
+// console.log(img1El, Product.allProducts[i].htmlId);
+// // add event listener on the images
+// img1El.addEventListener('click', nextProductSet);
 
-// callback function for the event listener to display 3 more items
-// track number times image is displayed 
-// track number of clicks on image
-function nextProductSet() {
-  productTableRender();
-}
+// // callback function for the event listener to display 3 more items
+// // track number times image is displayed 
+// // track number of clicks on image
+// function nextProductSet() {
+//   var i = 4; j = 5; k = 6;
+//   productTableRender();
+// }
 
-// invoke callback on page load to display first 3 images
-// make sure images were not immediately previously displayed
+// // invoke callback on page load to display first 3 images
+// // make sure images were not immediately previously displayed
 
-// after 25 selections, turn off event listener and display products and votes received -- display on new page? display item or just name with results?
+// // after 25 selections, turn off event listener and display products and votes received -- display on new page? display item or just name with results?
 
-function randomProduct() {
-  var randomIndex = Math.floor(Math.random() * Product.allProducts.length);
-}
+// function randomProduct() {
+//   var randomIndex = Math.floor(Math.random() * Product.allProducts.length);
+// }
+
+productTableRender();
