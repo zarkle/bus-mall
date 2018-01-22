@@ -55,17 +55,21 @@ function productTableRender() {
   img1.setAttribute('id', Product.allProducts[i].htmlId);
   img1.setAttribute('src', Product.allProducts[i].filepath);
   img1.setAttribute('alt', Product.allProducts[i].productName);
+  // event listener
+  img1.addEventListener('click', nextProductSet);
   var pEl = document.createElement('p');
   pEl.textContent = Product.allProducts[i].productName;
   tdEl.appendChild(img1);
   tdEl.appendChild(pEl);
   trEl.appendChild(tdEl);
+ 
   //second product
   tdEl = document.createElement('td');
   var img2 = document.createElement('img');
   img2.setAttribute('id', Product.allProducts[k].htmlId);
   img2.setAttribute('src', Product.allProducts[k].filepath);
   img2.setAttribute('alt', Product.allProducts[k].productName);
+  img2.addEventListener('click', nextProductSet);
   pEl = document.createElement('p');
   pEl.textContent = Product.allProducts[k].productName;
   tdEl.appendChild(img2);
@@ -77,6 +81,7 @@ function productTableRender() {
   img3.setAttribute('id', Product.allProducts[j].htmlId);
   img3.setAttribute('src', Product.allProducts[j].filepath);
   img3.setAttribute('alt', Product.allProducts[j].productName);
+  img3.addEventListener('click', nextProductSet);
   pEl = document.createElement('p');
   pEl.textContent = Product.allProducts[j].productName;
   tdEl.appendChild(img3);
@@ -88,18 +93,11 @@ function productTableRender() {
 
 productTableRender();
 
-// access image element from DOM
-var i = 0;
-var img1El = document.getElementById(Product.allProducts[i].htmlId);
-console.log(img1El, Product.allProducts[i].htmlId);
-// add event listener on the images
-img1El.addEventListener('click', nextProductSet);
-
 // callback function for the event listener to display 3 more items
 // track number times image is displayed 
 // track number of clicks on image
 function nextProductSet() {
-  var i = 4; j = 5; k = 6;
+  i = 4; j = 5; k = 6;
   productTableRender();
 }
 
