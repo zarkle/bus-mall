@@ -94,9 +94,30 @@ function handleClick(e) {
 
   if (Product.totalClicks > 5) {
     sectionEl.removeEventListener('click', handleClick);
-
+    img1El.src = '';
+    img2El.src = '';
+    img3El.src = '';
+    img1El.alt = '';
+    img2El.alt = '';
+    img3El.alt = '';
+    showResults();
+    votes();
   } else {
     randomProduct();
+  }
+}
+
+function votes() {
+  for (var i in Product.allProducts) {
+    productVotes[i] = Product.allProducts[i].productSelectedTally;
+  }
+}
+
+function showResults() {
+  for (var i in Product.allProducts) {
+    var liEl = document.createElement('li');
+    liEl.textContent = Product.allProducts[i].productName + ' has ' + Product.allProducts[i].productSelectedTally + ' votes and was presented ' + Product.allProducts[i].timesProductShown + ' times.';
+    ulEl.appendChild(liEl);
   }
 }
 
