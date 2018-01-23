@@ -2,6 +2,7 @@
 
 // array to store all products
 Product.allProducts = [];
+var totalClicks = 0;
 
 // constructor for Product objects
 // properties: name of object, filepath, number of times shown, number of times clicked, HTML id string
@@ -36,7 +37,11 @@ new Product('Tentacle USB', 'img/usb.gif', 'tentacle-usb');
 new Product('Self Water Can', 'img/water-can.jpg', 'water-can');
 new Product('Wine Glass', 'img/wine-glass.jpg', 'wine-glass');
 
-var i = 0; var j = 1; var k = 2; //index placeholders for testing
+// var i = 0, j = 1, k = 2; //index placeholders for testing
+var i = randomProduct();
+var j = randomProduct();
+var k = randomProduct();
+
 function productTableRender() {
   var productTable = document.getElementById('products-table');
   productTable.innerHTML = '';
@@ -91,14 +96,21 @@ function productTableRender() {
   productTable.appendChild(trEl);
 }
 
-productTableRender();
 
 // callback function for the event listener to display 3 more items
 // track number times image is displayed 
 // track number of clicks on image
 function nextProductSet() {
-  i = 4; j = 5; k = 6;
-  productTableRender();
+  totalClicks++;
+  if (totalClicks < 25) {
+    i = randomProduct();
+    j = randomProduct();
+    k = randomProduct();
+    productTableRender();
+  }
+  else {
+    renderResultsTable();
+  }
 }
 
 // invoke callback on page load to display first 3 images
@@ -108,5 +120,7 @@ function nextProductSet() {
 
 function randomProduct() {
   var randomIndex = Math.floor(Math.random() * Product.allProducts.length);
+  return randomIndex; 
 }
 
+productTableRender();
