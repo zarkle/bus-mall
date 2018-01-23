@@ -27,7 +27,7 @@ function Product(productName, filepath, htmlId) {
   this.timesProductShown = 0;
   this.productSelectedTally = 0;
   Product.allProducts.push(this);
-  productNames.push(this.name);
+  productNames.push(this.productName);
 }
 
 // create instances of Products
@@ -92,7 +92,7 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 5) {
+  if (Product.totalClicks > 24) {
     sectionEl.removeEventListener('click', handleClick);
     img1El.src = '';
     img2El.src = '';
@@ -102,6 +102,7 @@ function handleClick(e) {
     img3El.alt = '';
     showResults();
     votes();
+    renderChart();
   } else {
     randomProduct();
   }
@@ -119,6 +120,32 @@ function showResults() {
     liEl.textContent = Product.allProducts[i].productName + ' has ' + Product.allProducts[i].productSelectedTally + ' votes and was presented ' + Product.allProducts[i].timesProductShown + ' times.';
     ulEl.appendChild(liEl);
   }
+}
+
+// make chart from results
+function renderChart() {
+  var ctx = document.getElementById('chart').getContext('2d');
+  var chartColors = ['#555555'];
+  var productChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: 'Votes Per Product',
+        data: productVotes,
+        backgroundColors: chartColors,
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          tickets: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
 }
 
 sectionEl.addEventListener('click', handleClick);
