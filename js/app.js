@@ -44,7 +44,7 @@ var k = randomProduct();
 
 function randomProduct() {
   var randomIndex = Math.floor(Math.random() * Product.allProducts.length);
-  return randomIndex; 
+  return randomIndex;
 }
 
 function productTableRender() {
@@ -72,7 +72,7 @@ function productTableRender() {
   tdEl.appendChild(img1);
   tdEl.appendChild(pEl);
   trEl.appendChild(tdEl);
- 
+
   //second product
   tdEl = document.createElement('td');
   var img2 = document.createElement('img');
@@ -103,7 +103,7 @@ function productTableRender() {
 
 
 // callback function for the event listener to display 3 more items
-// track number times image is displayed 
+// track number times image is displayed
 // track number of clicks on image
 function nextProductSet() {
   totalClicks++;
@@ -140,7 +140,7 @@ function renderResultsTable() {
   thEl.textContent = 'Results';
   trEl.appendChild(thEl);
   resultsTable.appendChild(trEl);
-  
+
   //product row
   for (var i in Product.allProducts.length) {
     trEl = document.createElement('tr');
@@ -160,3 +160,22 @@ function renderResultsTable() {
 // after 25 selections, turn off event listener and display products and votes received -- display on new page? display item or just name with results?
 
 productTableRender();
+
+// IndexArray = [];
+//get index1, add # to IndexArray
+//get index2
+// if index2 !== IndexArray, then render cell, add # to IndexArray
+// else get index2 again and repeat
+//get index3
+// if index3 !== IndexArray, then render cell, add # to IndexArray
+// else get index 3 again and repeat
+
+// after click (next 3 products)
+// get index1
+// if index1 !== IndexArray, then render cell & add index # into IndexArray
+// else get index1 again and repeat
+// repeat for index2 and index3, adding #s to IndexArray
+
+//after click
+//remove first 3 elements in IndexArray
+//repeat "after click" steps
