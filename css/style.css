@@ -1,0 +1,30 @@
+body {
+  color: black;
+  font-size: 10px;
+  margin: auto;
+}
+
+h2 {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+}
+img, td {
+  width: 450px;
+}
+table {
+  border: 2px solid;
+  width: 100%;
+  empty-cells: hide;
+}
+
+th {
+  background-color: salmon;
+  font-size: 20px;
+  text-align: center
+}
+
+td {
+  text-align: center;
+  border: 3px solid purple;
+}
