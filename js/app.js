@@ -2,7 +2,13 @@
 
 // array to store all products
 Product.allProducts = [];
-var totalClicks = 0;
+// total clicks
+Product.totalClicks = 0;
+// track previously displayed products
+Product.lastDisplayed = [];
+
+var productTable = document.getElementById('products-table');
+var resultsTable = document.getElementById('results-table');
 
 // constructor for Product objects
 // properties: name of object, filepath, number of times shown, number of times clicked, HTML id string
@@ -37,10 +43,18 @@ new Product('Tentacle USB', 'img/usb.gif', 'tentacle-usb');
 new Product('Self Water Can', 'img/water-can.jpg', 'water-can');
 new Product('Wine Glass', 'img/wine-glass.jpg', 'wine-glass');
 
-// var i = 0, j = 1, k = 2; //index placeholders for testing
-var i = randomProduct();
-var j = randomProduct();
-var k = randomProduct();
+
+function getProduct() {
+  var i = randomProduct();
+  var j = randomProduct();
+  var k = randomProduct();
+
+  while (i === j || j === k || i === k || Product.lastDisplayed.includes(i) || Product.lastDisplayed.includes(j) || Product.lastDisplayed.includes(k)) {
+    i = randomProduct();
+    j = randomProduct();
+    k = randomProduct();
+  }
+}
 
 function randomProduct() {
   var randomIndex = Math.floor(Math.random() * Product.allProducts.length);
@@ -48,7 +62,6 @@ function randomProduct() {
 }
 
 function productTableRender() {
-  var productTable = document.getElementById('products-table');
   productTable.innerHTML = '';
 
   var trEl = document.createElement('tr');
@@ -106,8 +119,8 @@ function productTableRender() {
 // track number times image is displayed
 // track number of clicks on image
 function nextProductSet() {
-  totalClicks++;
-  if (totalClicks < 25) {
+  Product.totalClicks++;
+  if (Product.totalClicks < 5) {//change to 25 before submit
     i = randomProduct();
     j = randomProduct();
     k = randomProduct();
@@ -119,9 +132,7 @@ function nextProductSet() {
 }
 
 function renderResultsTable() {
-  var productTable = document.getElementById('products-table');
   productTable.innerHTML = '';
-  var resultsTable = document.getElementById('results-table');
   resultsTable.innerHTML = '';
 
   //header row
