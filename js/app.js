@@ -42,6 +42,11 @@ var i = randomProduct();
 var j = randomProduct();
 var k = randomProduct();
 
+function randomProduct() {
+  var randomIndex = Math.floor(Math.random() * Product.allProducts.length);
+  return randomIndex; 
+}
+
 function productTableRender() {
   var productTable = document.getElementById('products-table');
   productTable.innerHTML = '';
@@ -113,14 +118,45 @@ function nextProductSet() {
   }
 }
 
+function renderResultsTable() {
+  var productTable = document.getElementById('products-table');
+  productTable.innerHTML = '';
+  var resultsTable = document.getElementById('results-table');
+  resultsTable.innerHTML = '';
+
+  //header row
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.setAttribute('colspan', '2');
+  thEl.textContent = 'Results';
+  trEl.appendChild(thEl);
+  resultsTable.appendChild(trEl);
+
+  trEl = document.createElement('tr');
+  thEl = document.createElement('th');
+  thEl.textContent = 'Product';
+  trEl.appendChild(thEl);
+  thEl = document.createElement('th');
+  thEl.textContent = 'Results';
+  trEl.appendChild(thEl);
+  resultsTable.appendChild(trEl);
+  
+  //product row
+  for (var i in Product.allProducts.length) {
+    trEl = document.createElement('tr');
+    var tdEl = document.createElement('td');
+    tdEl.textContent = Product.allProducts[i].productName;
+    tdEl = document.createElement('td');
+    tdEl.textContent = Product.allProducts[i].timesProductShown;
+    tdEl.textContent = Product.allProducts[i].productSelectedTally;
+    trEl.appendChild(tdEl);
+    resultsTable.appendChild(trEl);
+  }
+}
+
 // invoke callback on page load to display first 3 images
 // make sure images were not immediately previously displayed
 
 // after 25 selections, turn off event listener and display products and votes received -- display on new page? display item or just name with results?
-
-function randomProduct() {
-  var randomIndex = Math.floor(Math.random() * Product.allProducts.length);
-  return randomIndex; 
-}
 
 productTableRender();
