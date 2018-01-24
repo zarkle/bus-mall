@@ -90,6 +90,8 @@ function votes() {
   for (var i in Product.allProducts) {
     productVotes[i] = Product.allProducts[i].productSelectedTally;
   }
+  // add to local storage
+  localStorage.votes = productVotes;
 }
 
 function showResults() {
@@ -151,3 +153,18 @@ new Product('Wine Glass', 'img/wine-glass.jpg', 'wine-glass');
 sectionEl.addEventListener('click', handleClick);
 
 randomProduct();
+
+// add persistence with local storage
+//check if there is already local storage
+//if (localStorage) {} else
+
+// if local storage, then parse info to reuse
+  // grab specific storage info
+  // parse out into array using split method localStorage.students.split(',');
+// else just run code fresh
+
+// add setter at end of voting
+//localStorage.array = storageArray
+
+// clear local storage, uncomment when running test again
+// localStorage.clear();
