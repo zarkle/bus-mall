@@ -36,6 +36,7 @@ function randomIndex() {
 }
 
 function randomProduct() {
+  
   var i = randomIndex();
   var j = randomIndex();
   var k = randomIndex();
@@ -152,6 +153,7 @@ new Product('Wine Glass', 'img/wine-glass.jpg', 'wine-glass');
 
 sectionEl.addEventListener('click', handleClick);
 
+voteAgain();
 randomProduct();
 
 // add persistence with local storage
@@ -162,6 +164,19 @@ randomProduct();
   // grab specific storage info
   // parse out into array using split method localStorage.students.split(',');
 // else just run code fresh
+
+// check if data already in local storage
+function voteAgain() {
+  if (localStorage.votes) {
+    productVotes = localStorage.votes.split(',');
+    console.log('votes', productVotes);
+    randomProduct();
+  } else {
+    productVotes = [];
+    // console.log('first');
+  }
+}
+
 
 // add setter at end of voting
 //localStorage.array = storageArray
