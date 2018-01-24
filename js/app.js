@@ -15,8 +15,8 @@ var img2El = document.getElementById('img2');
 var img3El = document.getElementById('img3');
 
 var productNames = [];
-
 var productVotes = [];
+var productShown = [];
 
 // constructor for Product objects
 // properties: name of object, filepath, number of times shown, number of times clicked, HTML id string
@@ -81,6 +81,7 @@ function handleClick(e) {
     img3El.alt = '';
     showResults();
     votes();
+    totalProductShown();
     renderChart();
   } else {
     randomProduct();
@@ -93,6 +94,14 @@ function votes() {
   }
   // add to local storage
   localStorage.votes = productVotes;
+}
+
+function totalProductShown() {
+  for (var i in Product.allProducts) {
+    productShown[i] = Product.allProducts[i].timesProductShown;
+  }
+  // add to local storage
+  localStorage.votes = productShown;
 }
 
 function showResults() {
