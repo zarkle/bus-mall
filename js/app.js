@@ -101,7 +101,7 @@ function totalProductShown() {
     productShown[i] = Product.allProducts[i].timesProductShown;
   }
   // add to local storage
-  localStorage.votes = productShown;
+  localStorage.shown = productShown;
 }
 
 function showResults() {
@@ -178,6 +178,7 @@ randomProduct();
 function voteAgain() {
   if (localStorage.votes) {
     productVotes = localStorage.votes.split(',');
+    productShown = localStorage.shown.split(',');
     console.log('votes', productVotes);
     randomProduct();
   } else {
