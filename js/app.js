@@ -27,7 +27,7 @@ function Product(productName, filepath, htmlId) {
   this.timesProductShown = 0;
   this.productSelectedTally = 0;
   Product.allProducts.push(this);
-  productNames.push(this.name);
+  productNames.push(this.productName);
 }
 
 // create instances of Products
@@ -92,7 +92,7 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 5) {
+  if (Product.totalClicks > 24) {
     sectionEl.removeEventListener('click', handleClick);
     img1El.src = '';
     img2El.src = '';
@@ -102,6 +102,7 @@ function handleClick(e) {
     img3El.alt = '';
     showResults();
     votes();
+    renderChart();
   } else {
     randomProduct();
   }
@@ -121,123 +122,32 @@ function showResults() {
   }
 }
 
+// make chart from results
+function renderChart() {
+  var ctx = document.getElementById('chart').getContext('2d');
+  var chartColors = '#264B44';
+  var productChart = new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: 'Votes Per Product',
+        data: productVotes,
+        backgroundColor: chartColors,
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          tickets: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
+
 sectionEl.addEventListener('click', handleClick);
 
 randomProduct();
-
-
-// function productTableRender() {
-  
-//   //first product
-//   trEl = document.createElement('tr');
-//   var tdEl = document.createElement('td');
-//   var img1 = document.createElement('img');
-//   img1.setAttribute('id', Product.allProducts[i].htmlId);
-//   // event listener
-//   img1.addEventListener('click', nextProductSet);
-//   var pEl = document.createElement('p');
-//   pEl.textContent = Product.allProducts[i].productName;
-//   tdEl.appendChild(img1);
-//   tdEl.appendChild(pEl);
-//   trEl.appendChild(tdEl);
-
-//   //second product
-//   tdEl = document.createElement('td');
-//   var img2 = document.createElement('img');
-//   img2.setAttribute('id', Product.allProducts[k].htmlId);
-//   img2.addEventListener('click', nextProductSet);
-//   pEl = document.createElement('p');
-//   pEl.textContent = Product.allProducts[k].productName;
-//   tdEl.appendChild(img2);
-//   tdEl.appendChild(pEl);
-//   trEl.appendChild(tdEl);
-//   //third product
-//   tdEl = document.createElement('td');
-//   var img3 = document.createElement('img');
-//   img3.setAttribute('id', Product.allProducts[j].htmlId);
-//   img3.addEventListener('click', nextProductSet);
-//   pEl = document.createElement('p');
-//   pEl.textContent = Product.allProducts[j].productName;
-//   tdEl.appendChild(img3);
-//   tdEl.appendChild(pEl);
-//   trEl.appendChild(tdEl);
-//   // append row of 3 products to table
-//   productTable.appendChild(trEl);
-// }
-
-
-// // callback function for the event listener to display 3 more items
-// // track number times image is displayed
-// // track number of clicks on image
-// function nextProductSet() {
-//   Product.totalClicks++;
-//   if (Product.totalClicks < 5) {//change to 25 before submit
-//     i = randomProduct();
-//     j = randomProduct();
-//     k = randomProduct();
-//     productTableRender();
-//   }
-//   else {
-//     renderResultsTable();
-//   }
-// }
-
-// function renderResultsTable() {
-//   productTable.innerHTML = '';
-//   resultsTable.innerHTML = '';
-
-//   //header row
-//   var trEl = document.createElement('tr');
-//   var thEl = document.createElement('th');
-//   thEl.setAttribute('colspan', '2');
-//   thEl.textContent = 'Results';
-//   trEl.appendChild(thEl);
-//   resultsTable.appendChild(trEl);
-
-//   trEl = document.createElement('tr');
-//   thEl = document.createElement('th');
-//   thEl.textContent = 'Product';
-//   trEl.appendChild(thEl);
-//   thEl = document.createElement('th');
-//   thEl.textContent = 'Results';
-//   trEl.appendChild(thEl);
-//   resultsTable.appendChild(trEl);
-
-//   //product row
-//   for (var i in Product.allProducts.length) {
-//     trEl = document.createElement('tr');
-//     var tdEl = document.createElement('td');
-//     tdEl.textContent = Product.allProducts[i].productName;
-//     tdEl = document.createElement('td');
-//     tdEl.textContent = Product.allProducts[i].timesProductShown;
-//     tdEl.textContent = Product.allProducts[i].productSelectedTally;
-//     trEl.appendChild(tdEl);
-//     resultsTable.appendChild(trEl);
-//   }
-// }
-
-// // invoke callback on page load to display first 3 images
-// // make sure images were not immediately previously displayed
-
-// // after 25 selections, turn off event listener and display products and votes received -- display on new page? display item or just name with results?
-
-// productTableRender();
-
-// // IndexArray = [];
-// //get index1, add # to IndexArray
-// //get index2
-// // if index2 !== IndexArray, then render cell, add # to IndexArray
-// // else get index2 again and repeat
-// //get index3
-// // if index3 !== IndexArray, then render cell, add # to IndexArray
-// // else get index 3 again and repeat
-
-// // after click (next 3 products)
-// // get index1
-// // if index1 !== IndexArray, then render cell & add index # into IndexArray
-// // else get index1 again and repeat
-// // repeat for index2 and index3, adding #s to IndexArray
-
-// //after click
-// //remove first 3 elements in IndexArray
-// //repeat "after click" steps

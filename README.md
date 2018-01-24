@@ -6,3 +6,5 @@ Create an app to get user votes on images, seen 3 at a time and non-repeating, t
 CSS reset from http://meyerweb.com/eric/tools/css/reset/ 
 
 .gitignore Created by https://www.gitignore.io/api/macos
+
+Chart.js library used to render bar chart
