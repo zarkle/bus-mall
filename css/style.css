@@ -25,3 +25,7 @@ ul {
   list-style: disc inside;
 }
 
+canvas {
+  width: 1200px !important;
+  margin: 0 auto;
+}
