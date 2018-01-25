@@ -36,7 +36,6 @@ function randomIndex() {
 }
 
 function randomProduct() {
-
   var i = randomIndex();
   var j = randomIndex();
   var k = randomIndex();
@@ -46,6 +45,7 @@ function randomProduct() {
     j = randomIndex();
     k = randomIndex();
   }
+
   img1El.src = Product.allProducts[i].filepath;
   img1El.alt = Product.allProducts[i].productName;
   img2El.src = Product.allProducts[k].filepath;
@@ -113,21 +113,38 @@ function showResults() {
 // make chart from results
 function renderChart() {
   var ctx = document.getElementById('chart').getContext('2d');
-  var chartColors = '#264B44';
+//make variables for 2 bars
+  var votesData = {
+    label: 'Votes',
+    data: productVotes,
+    backgroundColor: '#0375B4',
+    // xAxisID: "x-axis-votes"
+  };
+
+  var shownData = {
+    label: 'Times Shown',
+    data: productShown,
+    backgroundColor: '#007849',
+    // xAxisID: "x-axis-shown"
+  };
+
+  var productData = {
+    labels: productNames,
+    datasets: [votesData, shownData]
+  };
+
   var productChart = new Chart(ctx, { //eslint-disable-line
     type: 'horizontalBar',
-    data: {
-      labels: productNames,
-      datasets: [{
-        label: 'Votes Per Product',
-        data: productVotes,
-        backgroundColor: chartColors,
-      }]
-    },
+    data: productData,
+    // responsive: false,
     options: {
       scales: {
+        xAxes: [{
+          barPercentage: 1,
+          categoryPercentage: .6
+        }],
         yAxes: [{
-          tickets: {
+          ticks: {
             beginAtZero: true
           }
         }]
@@ -183,4 +200,3 @@ checkStorage();
 // put instances in a function that only runs if nothing in local storage
 // set whole object of all instances and get using JSON
 // if has local storage, parse JSON and don't make need instances
-
