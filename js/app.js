@@ -73,12 +73,12 @@ function handleClick(e) {
 
   if (Product.totalClicks > 4) {
     sectionEl.removeEventListener('click', handleClick);
-    img1El.src = '';
-    img2El.src = '';
-    img3El.src = '';
-    img1El.alt = '';
-    img2El.alt = '';
-    img3El.alt = '';
+    // img1El.src = '';
+    // img2El.src = '';
+    // img3El.src = '';
+    // img1El.alt = '';
+    // img2El.alt = '';
+    // img3El.alt = '';
     votes();
     totalProductShown();
     localStorage.setItem('products', JSON.stringify(Product.allProducts));
@@ -114,18 +114,11 @@ function totalProductShown() {
 
 function showResultsTable() {
   sectionEl.innerHTML = '';
-  // var h3El = document.getElementByTagName('h3');
-  // h3El.innerHTML = '';
+  document.getElementById('h3').innerHTML = 'Results';
+
   var tableEl = document.getElementById('results-table');
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
-  thEl.setAttribute('colspan', '4');
-  thEl.textContent = 'Results';
-  trEl.appendChild(thEl);
-  tableEl.appendChild(trEl);
-
-  trEl = document.createElement('tr');
-  thEl = document.createElement('th');
   thEl.textContent = 'Product';
   trEl.appendChild(thEl);
   thEl = document.createElement('th');

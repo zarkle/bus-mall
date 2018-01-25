@@ -11,11 +11,13 @@ h2 {
   color: cornsilk;
   font-weight: bold;
   text-align: center;
+  margin: 5px;
 }
 
 h3 {
   font-size: 25px;
   text-align: center;
+  margin: 5px;
 }
 
 img {
@@ -38,6 +40,11 @@ table, th, td {
 
 th {
   background-color: #008F95;
+  padding: 0 20px;
+}
+
+td {
+  padding: 0 5px;
 }
 
 canvas {
