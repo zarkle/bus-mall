@@ -71,7 +71,7 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 4) {
+  if (Product.totalClicks > 24) {
     sectionEl.removeEventListener('click', handleClick);
     img1El.src = '';
     img2El.src = '';
