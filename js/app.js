@@ -71,7 +71,7 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 24) {
+  if (Product.totalClicks > 4) {
     sectionEl.removeEventListener('click', handleClick);
     img1El.src = '';
     img2El.src = '';
@@ -83,7 +83,8 @@ function handleClick(e) {
     totalProductShown();
     localStorage.setItem('products', JSON.stringify(Product.allProducts));
     localStorage.setItem('productNames', JSON.stringify(productNames));
-    showResults();
+    // showResults();
+    showResultsTable();
     renderChart();
   } else {
     randomProduct();
@@ -102,12 +103,57 @@ function totalProductShown() {
   }
 }
 
-function showResults() {
+// function showResults() {
+//   sectionEl.innerHTML = '';
+//   for (var i in Product.allProducts) {
+//     var liEl = document.createElement('li');
+//     liEl.textContent = Product.allProducts[i].productName + ' has ' + Product.allProducts[i].productSelectedTally + ' votes and was presented ' + Product.allProducts[i].timesProductShown + ' times.';
+//     ulEl.appendChild(liEl);
+//   }
+// }
+
+function showResultsTable() {
   sectionEl.innerHTML = '';
-  for (var i in Product.allProducts) {
-    var liEl = document.createElement('li');
-    liEl.textContent = Product.allProducts[i].productName + ' has ' + Product.allProducts[i].productSelectedTally + ' votes and was presented ' + Product.allProducts[i].timesProductShown + ' times.';
-    ulEl.appendChild(liEl);
+  // var h3El = document.getElementByTagName('h3');
+  // h3El.innerHTML = '';
+  var tableEl = document.getElementById('results-table');
+  var trEl = document.createElement('tr');
+  var thEl = document.createElement('th');
+  thEl.setAttribute('colspan', '4');
+  thEl.textContent = 'Results';
+  trEl.appendChild(thEl);
+  tableEl.appendChild(trEl);
+
+  trEl = document.createElement('tr');
+  thEl = document.createElement('th');
+  thEl.textContent = 'Product';
+  trEl.appendChild(thEl);
+  thEl = document.createElement('th');
+  thEl.textContent = 'Views';
+  trEl.appendChild(thEl);
+  thEl = document.createElement('th');
+  thEl.textContent = 'Clicks';
+  trEl.appendChild(thEl);
+  thEl = document.createElement('th');
+  thEl.textContent = 'Percent';
+  trEl.appendChild(thEl);
+  tableEl.appendChild(trEl);
+
+  for (var i in productNames) {
+    trEl = document.createElement('tr');
+    var tdEl = document.createElement('td');
+    tdEl.textContent = productNames[i];
+    trEl.appendChild(tdEl);
+    tdEl = document.createElement('td');
+    tdEl.textContent = productShown[i];
+    trEl.appendChild(tdEl);
+    tdEl = document.createElement('td');
+    tdEl.textContent = productVotes[i];
+    trEl.appendChild(tdEl);
+    tdEl = document.createElement('td');
+    tdEl.textContent = '';
+    trEl.appendChild(tdEl);
+    tableEl.appendChild(trEl);
   }
 }
 
