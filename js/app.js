@@ -36,7 +36,7 @@ function randomIndex() {
 }
 
 function randomProduct() {
-  
+
   var i = randomIndex();
   var j = randomIndex();
   var k = randomIndex();
@@ -79,9 +79,11 @@ function handleClick(e) {
     img1El.alt = '';
     img2El.alt = '';
     img3El.alt = '';
-    showResults();
     votes();
     totalProductShown();
+    localStorage.setItem('products', JSON.stringify(Product.allProducts));
+    localStorage.setItem('productNames', JSON.stringify(productNames));
+    showResults();
     renderChart();
   } else {
     randomProduct();
@@ -92,16 +94,12 @@ function votes() {
   for (var i in Product.allProducts) {
     productVotes[i] = Product.allProducts[i].productSelectedTally;
   }
-  // add to local storage
-  localStorage.votes = productVotes;
 }
 
 function totalProductShown() {
   for (var i in Product.allProducts) {
     productShown[i] = Product.allProducts[i].timesProductShown;
   }
-  // add to local storage
-  localStorage.shown = productShown;
 }
 
 function showResults() {
@@ -139,57 +137,50 @@ function renderChart() {
 }
 
 // create instances of Products
-new Product('Star Wars Bag', 'img/bag.jpg', 'star-wars-bag');
-new Product('Banana Slicer', 'img/banana.jpg', 'banana-slicer');
-new Product('Bathroom Helper', 'img/bathroom.jpg', 'bathroom-helper');
-new Product('Open-Toed Boots', 'img/boots.jpg', 'boots');
-new Product('All-In-One Breakfast Oven', 'img/breakfast.jpg', 'breakfast-oven');
-new Product('Meatball Bubble Gum', 'img/bubblegum.jpg', 'bubble-gum');
-new Product('Red Funky Chair', 'img/chair.jpg', 'chair');
-new Product('Cthulhu Figurine', 'img/cthulhu.jpg', 'cthulhu');
-new Product('Dog Duck', 'img/dog-duck.jpg', 'dog-duck');
-new Product('Dragon Meat', 'img/dragon.jpg', 'dragon-meat');
-new Product('Utensil Pen Topper', 'img/pen.jpg', 'pen-topper');
-new Product('Pet Sweep', 'img/pet-sweep.jpg', 'pet-sweep');
-new Product('Pizza Scissors', 'img/scissors.jpg', 'pizza-scissors');
-new Product('Shark Sleeping Bag', 'img/shark.jpg', 'shark');
-new Product('Onesie Sweep', 'img/sweep.png', 'onesie-sweep');
-new Product('Tauntaun Sleeping Bag', 'img/tauntaun.jpg', 'tauntaun');
-new Product('Unicorn Meat', 'img/unicorn.jpg', 'unicorn-meat');
-new Product('Tentacle USB', 'img/usb.gif', 'tentacle-usb');
-new Product('Self Water Can', 'img/water-can.jpg', 'water-can');
-new Product('Wine Glass', 'img/wine-glass.jpg', 'wine-glass');
+function newInstances() {
+  new Product('Star Wars Bag', 'img/bag.jpg', 'star-wars-bag');
+  new Product('Banana Slicer', 'img/banana.jpg', 'banana-slicer');
+  new Product('Bathroom Helper', 'img/bathroom.jpg', 'bathroom-helper');
+  new Product('Open-Toed Boots', 'img/boots.jpg', 'boots');
+  new Product('All-In-One Breakfast Oven', 'img/breakfast.jpg', 'breakfast-oven');
+  new Product('Meatball Bubble Gum', 'img/bubblegum.jpg', 'bubble-gum');
+  new Product('Red Funky Chair', 'img/chair.jpg', 'chair');
+  new Product('Cthulhu Figurine', 'img/cthulhu.jpg', 'cthulhu');
+  new Product('Dog Duck', 'img/dog-duck.jpg', 'dog-duck');
+  new Product('Dragon Meat', 'img/dragon.jpg', 'dragon-meat');
+  new Product('Utensil Pen Topper', 'img/pen.jpg', 'pen-topper');
+  new Product('Pet Sweep', 'img/pet-sweep.jpg', 'pet-sweep');
+  new Product('Pizza Scissors', 'img/scissors.jpg', 'pizza-scissors');
+  new Product('Shark Sleeping Bag', 'img/shark.jpg', 'shark');
+  new Product('Onesie Sweep', 'img/sweep.png', 'onesie-sweep');
+  new Product('Tauntaun Sleeping Bag', 'img/tauntaun.jpg', 'tauntaun');
+  new Product('Unicorn Meat', 'img/unicorn.jpg', 'unicorn-meat');
+  new Product('Tentacle USB', 'img/usb.gif', 'tentacle-usb');
+  new Product('Self Water Can', 'img/water-can.jpg', 'water-can');
+  new Product('Wine Glass', 'img/wine-glass.jpg', 'wine-glass');
+}
 
-sectionEl.addEventListener('click', handleClick);
-
-voteAgain();
-randomProduct();
-
-// add persistence with local storage
-//check if there is already local storage
-//if (localStorage) {} else
-
-// if local storage, then parse info to reuse
-  // grab specific storage info
-  // parse out into array using split method localStorage.students.split(',');
-// else just run code fresh
-
-// check if data already in local storage
-function voteAgain() {
-  if (localStorage.votes) {
-    productVotes = localStorage.votes.split(',');
-    productShown = localStorage.shown.split(',');
-    console.log('votes', productVotes);
+function checkStorage() {
+  // check if data already in local storage
+  if (localStorage.products) {
+    Product.allProducts = JSON.parse(localStorage.products);
+    productNames = JSON.parse(localStorage.productNames);
     randomProduct();
   } else {
-    productVotes = [];
-    // console.log('first');
+    newInstances();
+    randomProduct();
+    console.log('first');
   }
 }
 
+sectionEl.addEventListener('click', handleClick);
 
-// add setter at end of voting
-//localStorage.array = storageArray
+checkStorage();
 
 // clear local storage, uncomment when running test again
 // localStorage.clear();
+
+// put instances in a function that only runs if nothing in local storage
+// set whole object of all instances and get using JSON
+// if has local storage, parse JSON and don't make need instances
+
