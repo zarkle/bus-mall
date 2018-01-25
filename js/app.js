@@ -103,6 +103,7 @@ function totalProductShown() {
 }
 
 function showResults() {
+  sectionEl.innerHTML = '';
   for (var i in Product.allProducts) {
     var liEl = document.createElement('li');
     liEl.textContent = Product.allProducts[i].productName + ' has ' + Product.allProducts[i].productSelectedTally + ' votes and was presented ' + Product.allProducts[i].timesProductShown + ' times.';
@@ -113,19 +114,17 @@ function showResults() {
 // make chart from results
 function renderChart() {
   var ctx = document.getElementById('chart').getContext('2d');
-//make variables for 2 bars
+  //make variables for 2 bars
   var votesData = {
     label: 'Votes',
     data: productVotes,
-    backgroundColor: '#0375B4',
-    // xAxisID: "x-axis-votes"
+    backgroundColor: '#E9B000',
   };
 
   var shownData = {
     label: 'Times Shown',
     data: productShown,
-    backgroundColor: '#007849',
-    // xAxisID: "x-axis-shown"
+    backgroundColor: '#E24E42',
   };
 
   var productData = {

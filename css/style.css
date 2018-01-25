@@ -1,5 +1,6 @@
 body {
   color: #000;
+  background-color: #EB6E80;
   font-size: 10px;
   margin: auto;
   font-size: 15px;
@@ -7,6 +8,7 @@ body {
 
 h2 {
   font-size: 40px;
+  color: darkviolet;
   font-weight: bold;
   text-align: center;
 }
@@ -18,6 +20,7 @@ h3 {
 
 img {
   width: 450px;
+  border: 5px solid #008F95;
 }
 
 ul {
