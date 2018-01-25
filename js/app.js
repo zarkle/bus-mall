@@ -9,7 +9,6 @@ Product.lastDisplayed = [];
 
 // access elements from DOM
 var sectionEl = document.getElementById('products-section');
-var ulEl = document.getElementById('results');
 var img1El = document.getElementById('img1');
 var img2El = document.getElementById('img2');
 var img3El = document.getElementById('img3');
@@ -71,19 +70,12 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 4) {
+  if (Product.totalClicks > 24) {
     sectionEl.removeEventListener('click', handleClick);
-    // img1El.src = '';
-    // img2El.src = '';
-    // img3El.src = '';
-    // img1El.alt = '';
-    // img2El.alt = '';
-    // img3El.alt = '';
     votes();
     totalProductShown();
     localStorage.setItem('products', JSON.stringify(Product.allProducts));
     localStorage.setItem('productNames', JSON.stringify(productNames));
-    // showResults();
     showResultsTable();
     renderChart();
   } else {
@@ -102,15 +94,6 @@ function totalProductShown() {
     productShown[i] = Product.allProducts[i].timesProductShown;
   }
 }
-
-// function showResults() {
-//   sectionEl.innerHTML = '';
-//   for (var i in Product.allProducts) {
-//     var liEl = document.createElement('li');
-//     liEl.textContent = Product.allProducts[i].productName + ' has ' + Product.allProducts[i].productSelectedTally + ' votes and was presented ' + Product.allProducts[i].timesProductShown + ' times.';
-//     ulEl.appendChild(liEl);
-//   }
-// }
 
 function showResultsTable() {
   sectionEl.innerHTML = '';
@@ -231,10 +214,3 @@ function checkStorage() {
 sectionEl.addEventListener('click', handleClick);
 
 checkStorage();
-
-// clear local storage, uncomment when running test again
-// localStorage.clear();
-
-// put instances in a function that only runs if nothing in local storage
-// set whole object of all instances and get using JSON
-// if has local storage, parse JSON and don't make need instances
