@@ -16,6 +16,7 @@ var img3El = document.getElementById('img3');
 var productNames = [];
 var productVotes = [];
 var productShown = [];
+var productPercent = [];
 
 // constructor for Product objects
 // properties: name of object, filepath, number of times shown, number of times clicked, HTML id string
@@ -70,10 +71,11 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 24) {
+  if (Product.totalClicks > 4) {
     sectionEl.removeEventListener('click', handleClick);
     votes();
     totalProductShown();
+    votePercent();
     localStorage.setItem('products', JSON.stringify(Product.allProducts));
     localStorage.setItem('productNames', JSON.stringify(productNames));
     showResultsTable();
@@ -95,6 +97,17 @@ function totalProductShown() {
   }
 }
 
+//percentage of times that an item was clicked when it was shown
+function votePercent() {
+  for (var i in Product.allProducts) {
+    if (Product.allProducts[i].timesProductShown === 0) {
+      productPercent[i] = 'N/A';
+    } else {
+      productPercent[i] = Math.floor((productVotes[i] / productShown[i]) * 100);
+    }
+  }
+}
+
 function showResultsTable() {
   sectionEl.innerHTML = '';
   document.getElementById('h3').innerHTML = 'Results';
@@ -111,7 +124,7 @@ function showResultsTable() {
   thEl.textContent = 'Clicks';
   trEl.appendChild(thEl);
   thEl = document.createElement('th');
-  thEl.textContent = 'Percent';
+  thEl.textContent = 'Percent (%)';
   trEl.appendChild(thEl);
   tableEl.appendChild(trEl);
 
@@ -127,7 +140,7 @@ function showResultsTable() {
     tdEl.textContent = productVotes[i];
     trEl.appendChild(tdEl);
     tdEl = document.createElement('td');
-    tdEl.textContent = '';
+    tdEl.textContent = productPercent[i];
     trEl.appendChild(tdEl);
     tableEl.appendChild(trEl);
   }
