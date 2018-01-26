@@ -71,7 +71,7 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 4) {
+  if (Product.totalClicks > 24) {
     sectionEl.removeEventListener('click', handleClick);
     votes();
     totalProductShown();
@@ -103,7 +103,7 @@ function votePercent() {
     if (Product.allProducts[i].timesProductShown === 0) {
       productPercent[i] = 'N/A';
     } else {
-      productPercent[i] = Math.floor((productVotes[i] / productShown[i]) * 100);
+      productPercent[i] = Math.round((productVotes[i] / productShown[i]) * 100);
     }
   }
 }
