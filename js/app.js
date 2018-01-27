@@ -71,7 +71,7 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 24) {
+  if (Product.totalClicks > 4) {
     sectionEl.removeEventListener('click', handleClick);
     votes();
     totalProductShown();
@@ -110,7 +110,8 @@ function votePercent() {
 
 function showResultsTable() {
   sectionEl.innerHTML = '';
-  document.getElementById('h3').innerHTML = 'Results';
+  document.getElementsByTagName('h3')[0].innerHTML = 'Thank you for taking our poll! Here are your results.';
+  // document.getElementById('h3').innerHTML = 'Results';
 
   var tableEl = document.getElementById('results-table');
   var trEl = document.createElement('tr');
@@ -118,10 +119,10 @@ function showResultsTable() {
   thEl.textContent = 'Product';
   trEl.appendChild(thEl);
   thEl = document.createElement('th');
-  thEl.textContent = 'Views';
+  thEl.textContent = 'Votes';
   trEl.appendChild(thEl);
   thEl = document.createElement('th');
-  thEl.textContent = 'Clicks';
+  thEl.textContent = 'Times Shown';
   trEl.appendChild(thEl);
   thEl = document.createElement('th');
   thEl.textContent = 'Percent (%)';
@@ -134,10 +135,10 @@ function showResultsTable() {
     tdEl.textContent = productNames[i];
     trEl.appendChild(tdEl);
     tdEl = document.createElement('td');
-    tdEl.textContent = productShown[i];
+    tdEl.textContent = productVotes[i];
     trEl.appendChild(tdEl);
     tdEl = document.createElement('td');
-    tdEl.textContent = productVotes[i];
+    tdEl.textContent = productShown[i];
     trEl.appendChild(tdEl);
     tdEl = document.createElement('td');
     tdEl.textContent = productPercent[i];
