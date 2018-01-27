@@ -71,7 +71,7 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 4) {
+  if (Product.totalClicks > 24) {
     sectionEl.removeEventListener('click', handleClick);
     votes();
     totalProductShown();
@@ -110,8 +110,7 @@ function votePercent() {
 
 function showResultsTable() {
   sectionEl.innerHTML = '';
-  document.getElementsByTagName('h3')[0].innerHTML = 'Thank you for taking our poll! Here are your results.';
-  // document.getElementById('h3').innerHTML = 'Results';
+  document.getElementsByTagName('h3')[0].innerHTML = 'Thank you for taking our survey!  Here are your results.';
 
   var tableEl = document.getElementById('results-table');
   var trEl = document.createElement('tr');
@@ -221,7 +220,6 @@ function checkStorage() {
   } else {
     newInstances();
     randomProduct();
-    console.log('first');
   }
 }
 

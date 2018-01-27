@@ -1,0 +1,32 @@
+form {
+  width: 500px;
+}
+
+label {
+  display: block;
+}
+
+button {
+  display: block;
+}
+
+table {
+  border: 2px solid #C6915D;
+}
+
+td, th {
+  border: 2px solid #C6915D;
+  padding: 5px;
+  text-align: center;
+  vertical-align: middle;
+  font-family: Helvetica, sans-serif;
+}
+
+th {
+  font-weight: bold;
+  background-color: #BC543B;
+}
+
+img {
+  width: 150px;
+}
