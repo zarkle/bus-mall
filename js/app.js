@@ -71,7 +71,7 @@ function handleClick(e) {
     }
   }
 
-  if (Product.totalClicks > 2) {
+  if (Product.totalClicks > 24) {
     sectionEl.removeEventListener('click', handleClick);
     votes();
     totalProductShown();
