@@ -12,17 +12,18 @@ var sectionEl = document.getElementById('products-section');
 var img1El = document.getElementById('img1');
 var img2El = document.getElementById('img2');
 var img3El = document.getElementById('img3');
+var buttonEl = document.getElementById('refresh');
 
 var productNames = [];
 var productVotes = [];
 var productShown = [];
+var productPercent = [];
 
 // constructor for Product objects
-// properties: name of object, filepath, number of times shown, number of times clicked, HTML id string
-function Product(productName, filepath, htmlId) {
+// properties: name of object, filepath, number of times shown, number of times clicked
+function Product(productName, filepath) {
   this.productName = productName;
   this.filepath = filepath;
-  this.htmlId = htmlId;
   this.timesProductShown = 0;
   this.productSelectedTally = 0;
   Product.allProducts.push(this);
@@ -74,6 +75,7 @@ function handleClick(e) {
     sectionEl.removeEventListener('click', handleClick);
     votes();
     totalProductShown();
+    votePercent();
     localStorage.setItem('products', JSON.stringify(Product.allProducts));
     localStorage.setItem('productNames', JSON.stringify(productNames));
     showResultsTable();
@@ -95,42 +97,57 @@ function totalProductShown() {
   }
 }
 
+//percentage of times that an item was clicked when it was shown
+function votePercent() {
+  for (var i in Product.allProducts) {
+    if (Product.allProducts[i].timesProductShown === 0) {
+      productPercent[i] = 'N/A';
+    } else {
+      productPercent[i] = Math.round((productVotes[i] / productShown[i]) * 100);
+    }
+  }
+}
+
 function showResultsTable() {
   sectionEl.innerHTML = '';
-  document.getElementById('h3').innerHTML = 'Results';
+  document.getElementsByTagName('h3')[0].innerHTML = 'Thank you for taking our survey!  Here are your results.';
 
+  // header row
   var tableEl = document.getElementById('results-table');
   var trEl = document.createElement('tr');
   var thEl = document.createElement('th');
   thEl.textContent = 'Product';
   trEl.appendChild(thEl);
   thEl = document.createElement('th');
-  thEl.textContent = 'Views';
+  thEl.textContent = 'Votes';
   trEl.appendChild(thEl);
   thEl = document.createElement('th');
-  thEl.textContent = 'Clicks';
+  thEl.textContent = 'Times Shown';
   trEl.appendChild(thEl);
   thEl = document.createElement('th');
-  thEl.textContent = 'Percent';
+  thEl.textContent = 'Percent (%)';
   trEl.appendChild(thEl);
   tableEl.appendChild(trEl);
 
+  // data
   for (var i in productNames) {
     trEl = document.createElement('tr');
     var tdEl = document.createElement('td');
     tdEl.textContent = productNames[i];
     trEl.appendChild(tdEl);
     tdEl = document.createElement('td');
-    tdEl.textContent = productShown[i];
-    trEl.appendChild(tdEl);
-    tdEl = document.createElement('td');
     tdEl.textContent = productVotes[i];
     trEl.appendChild(tdEl);
     tdEl = document.createElement('td');
-    tdEl.textContent = '';
+    tdEl.textContent = productShown[i];
+    trEl.appendChild(tdEl);
+    tdEl = document.createElement('td');
+    tdEl.textContent = productPercent[i];
     trEl.appendChild(tdEl);
     tableEl.appendChild(trEl);
   }
+  //display refresh button
+  buttonEl.style.visibility = 'visible';
 }
 
 // make chart from results
@@ -174,32 +191,8 @@ function renderChart() {
   });
 }
 
-// create instances of Products
-function newInstances() {
-  new Product('Star Wars Bag', 'img/bag.jpg', 'star-wars-bag');
-  new Product('Banana Slicer', 'img/banana.jpg', 'banana-slicer');
-  new Product('Bathroom Helper', 'img/bathroom.jpg', 'bathroom-helper');
-  new Product('Open-Toed Boots', 'img/boots.jpg', 'boots');
-  new Product('All-In-One Breakfast Oven', 'img/breakfast.jpg', 'breakfast-oven');
-  new Product('Meatball Bubble Gum', 'img/bubblegum.jpg', 'bubble-gum');
-  new Product('Red Funky Chair', 'img/chair.jpg', 'chair');
-  new Product('Cthulhu Figurine', 'img/cthulhu.jpg', 'cthulhu');
-  new Product('Dog Duck', 'img/dog-duck.jpg', 'dog-duck');
-  new Product('Dragon Meat', 'img/dragon.jpg', 'dragon-meat');
-  new Product('Utensil Pen Topper', 'img/pen.jpg', 'pen-topper');
-  new Product('Pet Sweep', 'img/pet-sweep.jpg', 'pet-sweep');
-  new Product('Pizza Scissors', 'img/scissors.jpg', 'pizza-scissors');
-  new Product('Shark Sleeping Bag', 'img/shark.jpg', 'shark');
-  new Product('Onesie Sweep', 'img/sweep.png', 'onesie-sweep');
-  new Product('Tauntaun Sleeping Bag', 'img/tauntaun.jpg', 'tauntaun');
-  new Product('Unicorn Meat', 'img/unicorn.jpg', 'unicorn-meat');
-  new Product('Tentacle USB', 'img/usb.gif', 'tentacle-usb');
-  new Product('Self Water Can', 'img/water-can.jpg', 'water-can');
-  new Product('Wine Glass', 'img/wine-glass.jpg', 'wine-glass');
-}
-
+// check if data already in local storage
 function checkStorage() {
-  // check if data already in local storage
   if (localStorage.products) {
     Product.allProducts = JSON.parse(localStorage.products);
     productNames = JSON.parse(localStorage.productNames);
@@ -207,10 +200,35 @@ function checkStorage() {
   } else {
     newInstances();
     randomProduct();
-    console.log('first');
   }
 }
 
-sectionEl.addEventListener('click', handleClick);
+// create instances of Products
+function newInstances() {
+  new Product('Star Wars Bag', 'img/bag.jpg');
+  new Product('Banana Slicer', 'img/banana.jpg');
+  new Product('Bathroom Helper', 'img/bathroom.jpg');
+  new Product('Open-Toed Boots', 'img/boots.jpg');
+  new Product('All-In-One Breakfast Oven', 'img/breakfast.jpg');
+  new Product('Meatball Bubble Gum', 'img/bubblegum.jpg');
+  new Product('Red Funky Chair', 'img/chair.jpg');
+  new Product('Cthulhu Figurine', 'img/cthulhu.jpg');
+  new Product('Dog Duck', 'img/dog-duck.jpg');
+  new Product('Dragon Meat', 'img/dragon.jpg');
+  new Product('Utensil Pen Topper', 'img/pen.jpg');
+  new Product('Pet Sweep', 'img/pet-sweep.jpg');
+  new Product('Pizza Scissors', 'img/scissors.jpg');
+  new Product('Shark Sleeping Bag', 'img/shark.jpg');
+  new Product('Onesie Sweep', 'img/sweep.png');
+  new Product('Tauntaun Sleeping Bag', 'img/tauntaun.jpg');
+  new Product('Unicorn Meat', 'img/unicorn.jpg');
+  new Product('Tentacle USB', 'img/usb.gif');
+  new Product('Self Water Can', 'img/water-can.jpg');
+  new Product('Wine Glass', 'img/wine-glass.jpg');
+}
 
+sectionEl.addEventListener('click', handleClick);
+buttonEl.addEventListener('click', function() {window.location.reload(true);});
+
+buttonEl.style.visibility = 'hidden';
 checkStorage();

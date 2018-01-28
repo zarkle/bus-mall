@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart_style.css">
+    <title>Bus Mall Shopping Cart</title>
+  </head>
+  <body>
+    <h1>Shopping Cart</h1>
+    <p>Please review your order before submitting.</p>
+    <table id="products-cart"></table>
+    <section id="customer-info">
+      <form id="customer-form">
+        <fieldset>
+          <legend>Customer Shipping Information</legend>
+
+          <label for="customerName">Name:</label>
+          <input name="customerName" type="text" required />
+
+          <label for="customerAddress">Address:</label>
+          <input name="customerAddress" type="text" required />
+
+          <label for="customerCity">City:</label>
+          <input name="customerCity" type="text" required />
+
+          <label for="customerState">State:</label>
+          <input name="customerState" type="text" maxlength="2" required />
+
+          <label for="customerZip">Zip Code:</label>
+          <input name="customerZip" type="number" required />
+
+          <label for="customerPhone">Phone Number:</label>
+          <input name="customerPhone" type="number" required />
+
+          <label for="creditCard">Credit Card Number:</label>
+          <input name="creditCard" type="number" required />
+
+          <button id="process-order">Process Order</button>
+        </fieldset>
+      </form>
+    </section>
+    <p><a href="index.html">Back to Home</a></p>
+    <script type="text/javascript" src="js/cart_app.js"></script>
+  </body>
+</html>
