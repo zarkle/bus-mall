@@ -71,8 +71,8 @@ function makeHeaderRow() {
 }
 
 // delete button function
-function buttonHandler(e) {
-  e.preventDefault();
+function buttonHandler(event) {
+  event.preventDefault();
   // if click on button only
   if (event.target.nodeName === 'BUTTON') {
     //which product correlates with the button click (its productName)
@@ -90,12 +90,20 @@ function buttonHandler(e) {
 }
 
 // form data function
-function formData(e) {
-  e.preventDefault();
-
+function formData(event) {
+  event.preventDefault();
+  var customerName = event.target.customerName.value;
+  var customerAddress = event.target.customerAddress.value;
+  var customerCity = event.target.customerCity.value;
+  var customerState = event.target.customerState.value;
+  var customerZip = event.target.customerZip.value;
+  var customerPhone = event.target.customerPhone.value;
+  var creditCard = event.target.creditCard.value;
   formEl.reset();
+  //then do something with the data
+  console.log(customerName, customerAddress, customerCity, customerState, customerZip, customerPhone, creditCard);
+  return [customerName, customerAddress, customerCity, customerState, customerZip, customerPhone, creditCard];
 }
-
 
 tableEl.addEventListener('click', buttonHandler);
 formEl.addEventListener('submit', formData);
